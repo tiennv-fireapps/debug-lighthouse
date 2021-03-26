@@ -1,0 +1,21 @@
+
+extend type Mutation {
+    register_api(input: CreateApiInput! @spread): Api @guard @field(resolver: "App\\GraphQL\\Mutations\\ApiMutations@registerApi")
+    edit_api(input: EditApiInput! @spread): Api @guard @field(resolver: "App\\GraphQL\\Mutations\\ApiMutations@editApi")
+
+}
+
+extend type Query {
+    apis: [Api!]! @paginate(defaultCount: 10)
+    apis1(name: String @eq orderBy: [OrderByClause!] @orderBy): [Api!]! @paginate(type: "paginator" model: "App\\Models\\Api")
+
+}
+
+input CreateApiInput{
+    name: String! @rules(apply:["required","string","min:3","max:50"])
+}
+
+input EditApiInput{
+    id: ID! @rules(apply: ["required","App\\Rules\\ApiOwnerCheck"])
+    name: String! @rules(apply:["required","string","min:3","max:50"])
+}

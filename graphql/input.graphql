@@ -1,0 +1,28 @@
+
+
+enum Role{
+    Manager @enum(value: M)
+    Receptionist @enum(value: R)
+    Employee @enum(value: E)
+    BasicEmployee @enum(value: BE)
+}
+
+input AuthRoleInput{
+    codename: Role!
+}
+
+input CategoryInput{
+    id: ID! @rules(apply:["string","size:36","regex:#^[a-zA-Z0-9-]+$#"])
+}
+
+
+
+input OrderByClause{
+    field: String!
+    order: SortOrder!
+}
+
+enum SortOrder {
+    ASC
+    DESC
+}

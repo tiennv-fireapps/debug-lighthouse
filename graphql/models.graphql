@@ -1,0 +1,6 @@
+
+type Api{
+    id: ID
+    name: String
+    user: User!
+}
